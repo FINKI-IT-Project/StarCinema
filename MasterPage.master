@@ -7,6 +7,7 @@
     <title>StarCinema</title>
 
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -18,9 +19,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 
-
     <!-- Personal CSS File -->
-    <link rel="stylesheet" href="layout.css" />
+    <link rel="stylesheet" href="resources/css/layout.css" />
 
 
 
@@ -42,6 +42,7 @@
                     <div class="btn-group pull-right">
                         <button class="btn btn-primary">Log In</button>
                         <button class="btn btn-primary">Sign Up</button>
+                      
                     </div>
                 </div>
             </div>
@@ -54,18 +55,12 @@
 
                     <nav class="navbar navbar-inverse">
                         <div class="container">
-                            <div class="navbar-header">
-                                <a class="navbar-brand" href="#">
-                                    <span class="glyphicon glyphicon-film"></span>
-                                </a>
-                            </div>
-
                             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                                 <ul class="nav navbar-nav">
-                                    <li><a href="#">HOME</a></li>
-                                    <li><a href="#">MOVIES</a></li>
-                                    <li><a href="#">ABOUT US</a></li>
-                                    <li><a href="#">CONTACT</a></li>
+                                    <li><a href="#"><span class="glyphicon glyphicon-home"></span> HOME</a></li>
+                                    <li><a href="#"><span class="glyphicon glyphicon-film"></span> MOVIES</a></li>
+                                    <li><a href="#"><span class="glyphicon glyphicon-info-sign"></span> ABOUT US</a></li>
+                                    <li><a href="#"><span class="glyphicon glyphicon-phone-alt"></span> CONTACT</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -100,7 +95,6 @@
                 <div id="footer" class="row">
 
                     <div class="col-xs-12 well">
-
                         FOOTER TEXT
 
                     </div>
