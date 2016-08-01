@@ -11,3 +11,30 @@ hr {
 #footer {
     text-align: center;
 }
+
+.hddn {
+    display: none;
+}
+
+.moviePlot {
+    text-align: justify;
+    font-size: 100%;
+}
+
+.movieTitle {
+   text-shadow: 1px 1px 1px black;
+   color: #44f;
+}
+
+.movieStaff {
+    text-align: justify;
+    font-weight: normal;
+}
+
+.moviePosition {
+    font-weight: bold;
+}
+
+li {
+    margin: 3px 0px;
+}

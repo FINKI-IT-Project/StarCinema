@@ -90,8 +90,6 @@
                         <ItemStyle Font-Bold="True" />
                     </asp:BoundField>
                     <asp:BoundField DataField="movie_name" HeaderText="Movie Title"></asp:BoundField>
-                    <asp:BoundField DataField="movie_description" HeaderText="Movie Description"></asp:BoundField>
-                    <asp:BoundField DataField="movie_poster" HeaderText="Movie Poster"></asp:BoundField>
                 </Columns>
                 <EditRowStyle BackColor="#2461BF" />
                 <FooterStyle BackColor="#507CD1" ForeColor="White" Font-Bold="True" />
