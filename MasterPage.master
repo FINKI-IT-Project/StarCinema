@@ -40,7 +40,7 @@
             <div class="row">
 
                 <div class="col-xs-6">
-                    <h1>StarCinema</h1>
+                    <h1 class="logo">StarCinema</h1>
                 </div>
 
                 <div class="col-xs-6">
@@ -62,9 +62,9 @@
                             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                                 <ul class="nav navbar-nav">
                                     <li><a href="/Default.aspx"><span class="glyphicon glyphicon-home"></span> HOME</a></li>
-                                    <li><a href="/Movies.aspx"><span class="glyphicon glyphicon-film"></span> MOVIES</a></li>
-                                    <li><a href="/About.aspx"><span class="glyphicon glyphicon-info-sign"></span> ABOUT US</a></li>
-                                    <li><a href="/Contact.aspx"><span class="glyphicon glyphicon-phone-alt"></span> CONTACT</a></li>
+                                    <li><a href="/Movies.aspx">MOVIES</a></li>
+                                    <li><a href="/About.aspx">ABOUT US</a></li>
+                                    <li><a href="/Contact.aspx">CONTACT</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -99,8 +99,7 @@
                 <div id="footer" class="row">
 
                     <div class="col-xs-12 well">
-                        FOOTER TEXT
-
+                        Copyright® FINKI-IT, 2016.
                     </div>
 
                 </div>

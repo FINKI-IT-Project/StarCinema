@@ -24,8 +24,43 @@ public partial class MovieDetails : System.Web.UI.Page
         {
             Response.Redirect("Default.aspx");
         }
-    }
+        
+        int[] row = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
+
+        // Insert movie screening day, term, hall;
+        // InsertData.insertData();
+
+        // Insert movie seats;
+        // InsertData.insertSeatings();
+
+        SqlConnection con = new SqlConnection(connectionString);
+        DataSet ds = new DataSet();
+        SqlDataReader dr = null;
+
+        try
+        {
+            SqlCommand com = new SqlCommand();
+            com.Connection = con;
+            com.CommandText = "SELECT day, term, hall FROM screenings WHERE movie_id=@MID;";
+            com.Parameters.AddWithValue("@MID", Request.QueryString["id"]);
+
+            con.Open();
+
+            dr = com.ExecuteReader();
+            movieScreenings.DataSource = dr;
+            movieScreenings.DataBind();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("ERROR: ------ " + ex.Message);
+        }
+        finally
+        {
+            con.Close();
+        }
+
+    }
 
     protected void setMovieName(string id)
     {

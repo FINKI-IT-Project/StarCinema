@@ -5,8 +5,8 @@
     <style>
         .carousel-inner > .item > img,
         .carousel-inner > .item > a > img {
-            width: 75%;
-            height: 400px;
+            width: 33%;
+            height: 100px;
             margin: auto;
         }
     </style>
