@@ -14,7 +14,7 @@ public class InsertData
     public static void insertData()
     {
         string connectionString = WebConfigurationManager.ConnectionStrings["myConnection"].ConnectionString;
-        int[] movie_id = { 6, 7, 8, 9, 10, 11, 12, 13, 14 };
+        int[] movie_id = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
         string[] day = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
 
         for (int i = 0; i < day.Length; ++i)
@@ -35,6 +35,7 @@ public class InsertData
                     com.Parameters.AddWithValue("@HALL", (j / 3) + 1);
                     com.Parameters.AddWithValue("@TERM", (j % 3) + 1);
                     com.ExecuteNonQuery();
+                    Thread.Sleep(300);
                 }
                 catch (Exception ex)
                 {
@@ -52,7 +53,7 @@ public class InsertData
     {
         string connectionString = WebConfigurationManager.ConnectionStrings["myConnection"].ConnectionString;
 
-        for (int i = 64; i < 118; ++i)
+        for (int i = 108; i <= 108; ++i)
         {
             for (int j = 1; j <= 10; ++j)
             {
