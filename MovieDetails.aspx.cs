@@ -15,49 +15,51 @@ public partial class MovieDetails : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-
-        try
+        if (Page.IsPostBack == false)
         {
-            setMovieName(Request.QueryString["id"].ToString());
-        }
-        catch (Exception ex)
-        {
-            Response.Redirect("Default.aspx");
-        }
-        
-        int[] row = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+            try
+            {
+                setMovieName(Request.QueryString["id"].ToString());
+            }
+            catch (Exception ex)
+            {
+                Response.Redirect("Default.aspx");
+            }
+
+            int[] row = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
 
-        // Insert movie screening day, term, hall;
-        // InsertData.insertData();
+            // Insert movie screening day, term, hall;
+            // InsertData.insertData();
 
-        // Insert movie seats;
-        // InsertData.insertSeatings();
+            // Insert movie seats;
+            // InsertData.insertSeatings();
 
-        SqlConnection con = new SqlConnection(connectionString);
-        DataSet ds = new DataSet();
-        SqlDataReader dr = null;
+            SqlConnection con = new SqlConnection(connectionString);
+            DataSet ds = new DataSet();
+            SqlDataReader dr = null;
 
-        try
-        {
-            SqlCommand com = new SqlCommand();
-            com.Connection = con;
-            com.CommandText = "SELECT day, term, hall FROM screenings WHERE movie_id=@MID;";
-            com.Parameters.AddWithValue("@MID", Request.QueryString["id"]);
+            try
+            {
+                SqlCommand com = new SqlCommand();
+                com.Connection = con;
+                com.CommandText = "SELECT day, term, hall FROM screenings WHERE movie_id=@MID;";
+                com.Parameters.AddWithValue("@MID", Request.QueryString["id"]);
 
-            con.Open();
+                con.Open();
 
-            dr = com.ExecuteReader();
-            movieScreenings.DataSource = dr;
-            movieScreenings.DataBind();
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine("ERROR: ------ " + ex.Message);
-        }
-        finally
-        {
-            con.Close();
+                dr = com.ExecuteReader();
+                movieScreenings.DataSource = dr;
+                movieScreenings.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERROR: ------ " + ex.Message);
+            }
+            finally
+            {
+                con.Close();
+            }
         }
 
     }
@@ -100,5 +102,31 @@ public partial class MovieDetails : System.Web.UI.Page
 
 
     }
+
+    protected void seatRow_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        DropDownList ddl = sender as DropDownList;
+        ddl.Text="3";
+        //DropDownList tem = (DropDownList)movieScreenings.Rows[1].Cells[4].Controls[0];
+
+        foreach (GridViewRow row in movieScreenings.Rows)
+        {
+            //Finding Dropdown control  
+            Control ctrl = row.FindControl("seatNumber") as DropDownList;
+            Control t1 = row.FindControl("seatRow") as DropDownList;
+            if (ctrl != null)
+            {
+            
+                DropDownList ddl1 = (DropDownList)ctrl;
+                if (t1==ddl)
+                    ddl1.Text="2";
+
+                //Comparing ClientID of the dropdown with sender
+
+            }
+        }
+    }
+
+
 
 }

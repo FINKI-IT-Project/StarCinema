@@ -111,7 +111,8 @@
                     <asp:TemplateField HeaderText="Row" ItemStyle-CssClass="cellPadding">
 
                         <ItemTemplate>
-                            <asp:DropDownList ID="seatRow" runat="server" CssClass="form-control">
+                            <asp:DropDownList ID="seatRow" runat="server" CssClass="form-control" AutoPostBack="true" 
+   OnSelectedIndexChanged="seatRow_SelectedIndexChanged">
                                 <asp:ListItem>1</asp:ListItem>
                                 <asp:ListItem>2</asp:ListItem>
                                 <asp:ListItem>3</asp:ListItem>
@@ -130,6 +131,17 @@
 
                         <ItemTemplate>
                             <asp:DropDownList ID="seatNumber" runat="server" CssClass="form-control">
+                                <asp:ListItem></asp:ListItem>
+                                <asp:ListItem>1</asp:ListItem>
+                                <asp:ListItem>2</asp:ListItem>
+                                <asp:ListItem>3</asp:ListItem>
+                                <asp:ListItem>4</asp:ListItem>
+                                <asp:ListItem>5</asp:ListItem>
+                                <asp:ListItem>6</asp:ListItem>
+                                <asp:ListItem>7</asp:ListItem>
+                                <asp:ListItem>8</asp:ListItem>
+                                <asp:ListItem>9</asp:ListItem>
+                                <asp:ListItem>10</asp:ListItem>
                             </asp:DropDownList>
                         </ItemTemplate>
 
