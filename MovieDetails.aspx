@@ -95,24 +95,44 @@
 
 
     <div class="row">
+        <div class="col-xs-9 col-xs-offset-3" style="margin-bottom: 20px">
+            <asp:Label ID="messageSuccess" runat="server" CssClass="alert alert-success"></asp:Label>
+        </div>
+    </div>
+
+
+
+    <div class="row">
 
 
         <div class="col-xs-12">
-            <asp:GridView ID="movieScreenings" runat="server" AutoGenerateColumns="False" CellPadding="4" EnableModelValidation="True" ForeColor="#333333" GridLines="None" Width="75%" HorizontalAlign="Center">
+
+
+            <asp:GridView ID="movieScreenings" runat="server" AutoGenerateColumns="False" CellPadding="4" EnableModelValidation="True" ForeColor="#333333" GridLines="None" Width="80%" HorizontalAlign="Center">
                 <AlternatingRowStyle BackColor="White" />
                 <Columns>
-                    <asp:BoundField DataField="day" HeaderText="Day" ReadOnly="True" HeaderStyle-CssClass="textIndent" ItemStyle-CssClass="cellPadding">
-<HeaderStyle CssClass="textIndent"></HeaderStyle>
+                    <asp:BoundField DataField="screen_id" HeaderText="Screen ID" ReadOnly="True" HeaderStyle-CssClass="textIndent" ItemStyle-CssClass="cellPadding">
+                        <HeaderStyle CssClass="textIndent"></HeaderStyle>
 
                         <ItemStyle Font-Bold="True" CssClass="textIndent" />
                     </asp:BoundField>
-                    <asp:BoundField DataField="term" HeaderText="Term" ReadOnly="True" ItemStyle-CssClass="termTime cellPadding" />
-                    <asp:BoundField DataField="hall" HeaderText="Hall" ReadOnly="True" ItemStyle-CssClass="hallName cellPadding" />
+                    <asp:BoundField DataField="day" HeaderText="Day" ReadOnly="True" HeaderStyle-CssClass="textIndent" ItemStyle-CssClass="cellPadding">
+                        <HeaderStyle CssClass="textIndent"></HeaderStyle>
+
+                        <ItemStyle Font-Bold="True" CssClass="textIndent" />
+                    </asp:BoundField>
+                    <asp:BoundField DataField="term" HeaderText="Term" ReadOnly="True" ItemStyle-CssClass="termTime cellPadding">
+                        <ItemStyle CssClass="termTime cellPadding"></ItemStyle>
+                    </asp:BoundField>
+                    <asp:BoundField DataField="hall" HeaderText="Hall" ReadOnly="True" ItemStyle-CssClass="hallName cellPadding">
+                        <ItemStyle CssClass="hallName cellPadding"></ItemStyle>
+                    </asp:BoundField>
                     <asp:TemplateField HeaderText="Row" ItemStyle-CssClass="cellPadding">
 
                         <ItemTemplate>
-                            <asp:DropDownList ID="seatRow" runat="server" CssClass="form-control" AutoPostBack="true" 
-   OnSelectedIndexChanged="seatRow_SelectedIndexChanged">
+                            <asp:DropDownList ID="seatRow" runat="server" CssClass="form-control" AutoPostBack="true"
+                                OnSelectedIndexChanged="seatRow_SelectedIndexChanged" AppendDataBoundItems="true">
+                                <asp:ListItem>-- Select row --</asp:ListItem>
                                 <asp:ListItem>1</asp:ListItem>
                                 <asp:ListItem>2</asp:ListItem>
                                 <asp:ListItem>3</asp:ListItem>
@@ -125,29 +145,26 @@
                                 <asp:ListItem>10</asp:ListItem>
                             </asp:DropDownList>
                         </ItemTemplate>
+
+                        <ItemStyle CssClass="cellPadding"></ItemStyle>
 
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Number" ItemStyle-CssClass="cellPadding">
 
                         <ItemTemplate>
-                            <asp:DropDownList ID="seatNumber" runat="server" CssClass="form-control">
-                                <asp:ListItem></asp:ListItem>
-                                <asp:ListItem>1</asp:ListItem>
-                                <asp:ListItem>2</asp:ListItem>
-                                <asp:ListItem>3</asp:ListItem>
-                                <asp:ListItem>4</asp:ListItem>
-                                <asp:ListItem>5</asp:ListItem>
-                                <asp:ListItem>6</asp:ListItem>
-                                <asp:ListItem>7</asp:ListItem>
-                                <asp:ListItem>8</asp:ListItem>
-                                <asp:ListItem>9</asp:ListItem>
-                                <asp:ListItem>10</asp:ListItem>
+                            <asp:DropDownList ID="seatNumber" runat="server" CssClass="form-control" Enabled="false">
+                                <asp:ListItem>No row selected.</asp:ListItem>
                             </asp:DropDownList>
                         </ItemTemplate>
 
+                        <ItemStyle CssClass="cellPadding"></ItemStyle>
+
                     </asp:TemplateField>
-                    <asp:ButtonField HeaderText="Reserve Movie" Text="Reserve" ItemStyle-CssClass="cellPadding">
-                    </asp:ButtonField>
+                    <asp:TemplateField HeaderText="Reserve Movie" HeaderStyle-CssClass="textIndent" ItemStyle-CssClass="textIndent">
+                        <ItemTemplate>
+                            <asp:Button OnClick="reserveMovie_Click" ID="reserveMovie" runat="server" Text="Reserve" CssClass="btn btn-sm btn-success" />
+                        </ItemTemplate>
+                    </asp:TemplateField>
                 </Columns>
                 <EditRowStyle BackColor="#7C6F57" />
                 <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
@@ -156,6 +173,10 @@
                 <RowStyle BackColor="#E3EAEB" />
                 <SelectedRowStyle BackColor="#C5BBAF" Font-Bold="True" ForeColor="#333333" />
             </asp:GridView>
+
+            <br />
+
+            <asp:Label ID="lbl1" runat="server"></asp:Label>
         </div>
 
 

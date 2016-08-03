@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -15,8 +16,13 @@ public partial class MovieDetails : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        Page.MaintainScrollPositionOnPostBack = true;
+
         if (Page.IsPostBack == false)
         {
+
+            messageSuccess.Visible = false;
+
             try
             {
                 setMovieName(Request.QueryString["id"].ToString());
@@ -43,7 +49,7 @@ public partial class MovieDetails : System.Web.UI.Page
             {
                 SqlCommand com = new SqlCommand();
                 com.Connection = con;
-                com.CommandText = "SELECT day, term, hall FROM screenings WHERE movie_id=@MID;";
+                com.CommandText = "SELECT screen_id, day, term, hall FROM screenings WHERE movie_id=@MID;";
                 com.Parameters.AddWithValue("@MID", Request.QueryString["id"]);
 
                 con.Open();
@@ -105,28 +111,122 @@ public partial class MovieDetails : System.Web.UI.Page
 
     protected void seatRow_SelectedIndexChanged(object sender, EventArgs e)
     {
-        DropDownList ddl = sender as DropDownList;
-        ddl.Text="3";
-        //DropDownList tem = (DropDownList)movieScreenings.Rows[1].Cells[4].Controls[0];
 
-        foreach (GridViewRow row in movieScreenings.Rows)
+        messageSuccess.Visible = false;
+        DropDownList changedDropDownList = sender as DropDownList;
+        var noSeats = new List<string> { "No free seats!" };
+        var noRow = new List<string> { "No row selected!" };
+
+        GridViewRow row = changedDropDownList.Parent.Parent as GridViewRow;
+
+        DropDownList seatNumber = row.FindControl("seatNumber") as DropDownList;
+        DropDownList seatRow = row.FindControl("seatRow") as DropDownList;
+        if (seatNumber != null)
         {
-            //Finding Dropdown control  
-            Control ctrl = row.FindControl("seatNumber") as DropDownList;
-            Control t1 = row.FindControl("seatRow") as DropDownList;
-            if (ctrl != null)
+            if (seatRow.Text == "-- Select row --")
             {
-            
-                DropDownList ddl1 = (DropDownList)ctrl;
-                if (t1==ddl)
-                    ddl1.Text="2";
+                seatNumber.DataSource = noRow;
+                seatNumber.DataTextField = null;
+                seatNumber.DataBind();
+                seatNumber.Enabled = false;
+                return;
+            }
 
-                //Comparing ClientID of the dropdown with sender
+
+            SqlConnection con = new SqlConnection(connectionString);
+            SqlCommand com = new SqlCommand();
+            com.Connection = con;
+            com.CommandText = "SELECT number FROM seats WHERE screen_id = @SID AND row = @ROW;";
+            com.Parameters.AddWithValue("@SID", row.Cells[0].Text.ToString());
+            com.Parameters.AddWithValue("@ROW", seatRow.Text.ToString());
+
+            SqlDataReader sdr;
+            try
+            {
+                con.Open();
+                sdr = com.ExecuteReader();
+                if (sdr.HasRows)
+                {
+                    seatNumber.DataSource = sdr;
+                    seatNumber.DataTextField = "number";
+                    seatNumber.DataBind();
+                    seatNumber.Enabled = true;
+                }
+                else
+                {
+                    seatNumber.DataSource = noSeats;
+                    seatNumber.DataTextField = null;
+                    seatNumber.DataBind();
+                    seatNumber.Enabled = false;
+                }
+            }
+            catch (Exception ex)
+            {
 
             }
+            finally
+            {
+                con.Close();
+            }
+
         }
     }
 
 
 
+    protected void reserveMovie_Click(object sender, EventArgs e)
+    {
+
+        var noSeats = new List<string> { "No free seats!" };
+        Control a = sender as Control;
+        GridViewRow row = a.Parent.Parent as GridViewRow;
+
+        string screen_id = row.Cells[0].Text;
+        DropDownList seatRow = row.FindControl("seatRow") as DropDownList;
+        DropDownList seatNumber = row.FindControl("seatNumber") as DropDownList;
+
+        SqlConnection con = new SqlConnection(connectionString);
+        SqlCommand com = new SqlCommand();
+        com.Connection = con;
+        com.CommandText = "DELETE FROM seats WHERE screen_id = @SID AND row = @ROW AND number = @NUM;";
+        com.Parameters.AddWithValue("@SID", screen_id);
+        com.Parameters.AddWithValue("@ROW", seatRow.Text.ToString());
+        com.Parameters.AddWithValue("@NUM", seatNumber.Text.ToString());
+        string number = seatNumber.Text;
+
+
+        try
+        {
+            con.Open();
+            int rows = com.ExecuteNonQuery();
+
+            lbl1.Text = rows + " rows affected.";
+
+            if (rows > 0)
+            {
+                seatNumber.Items.Remove(seatNumber.Text);
+                messageSuccess.Visible = true;
+                messageSuccess.Text = "<b>Success!</b> You have successfully reserved your seat - Row: <b>" + seatRow.Text + "</b> Number: <b>" + number + "</b>";
+            }
+
+            if (seatNumber.Items.Count == 0)
+            {
+                seatNumber.DataSource = noSeats;
+                seatNumber.DataTextField = null;
+                seatNumber.DataBind();
+                seatNumber.Enabled = false;
+            }
+
+
+
+        }
+        catch (Exception ex)
+        {
+
+        }
+        finally
+        {
+            con.Close();
+        }
+    }
 }
