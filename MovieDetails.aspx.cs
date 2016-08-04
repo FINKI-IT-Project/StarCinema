@@ -68,6 +68,18 @@ public partial class MovieDetails : System.Web.UI.Page
             }
         }
 
+        // Check if user is logged in;
+        bool val1 = (System.Web.HttpContext.Current.User != null) && System.Web.HttpContext.Current.User.Identity.IsAuthenticated;
+
+        if (val1)
+        {
+            movieScreenings.Enabled = true;
+        }
+        else
+        {
+            movieScreenings.Enabled = false;
+        }
+
     }
 
     protected void setMovieName(string id)
@@ -206,7 +218,7 @@ public partial class MovieDetails : System.Web.UI.Page
             {
                 seatNumber.Items.Remove(seatNumber.Text);
                 messageSuccess.Visible = true;
-                messageSuccess.Text = "<b>Success!</b> You have successfully reserved your seat - Row: <b>" + seatRow.Text + "</b> Number: <b>" + number + "</b>";
+                messageSuccess.Text = "<span class='glyphicon glyphicon-ok'></span> <b>Success!</b> You have successfully reserved your seat - Row: <b>" + seatRow.Text + "</b> Number: <b>" + number + "</b>";
             }
 
             if (seatNumber.Items.Count == 0)

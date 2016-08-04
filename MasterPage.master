@@ -17,10 +17,10 @@
 
 
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
 
     <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous" />
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -43,11 +43,24 @@
                     <h1 class="logo">StarCinema</h1>
                 </div>
 
-                <div class="col-xs-6">
-                    <div class="btn-group pull-right">
-                        <asp:Button ID="logIn" runat="server" CssClass="btn btn-primary" Text="Log In"></asp:Button>
-                        <asp:Button ID="signUp" runat="server" CssClass="btn btn-primary" Text="Sign Up"></asp:Button>
-                    </div>
+                <div class="col-xs-6" align="right">
+
+                    <asp:LoginView ID="LoginView1" runat="server">
+                        <AnonymousTemplate>
+                            <div class="btn-group">
+                                <asp:Label runat="server" CssClass="label label-default">Hello guest, please log in!</asp:Label>
+                                <br />
+                                <br />
+                                <asp:LoginStatus ID="LoginStatus1" runat="server" LoginText="Log in" LogoutText="Log out" style="float: right;" CssClass="btn btn-primary btn-sm" />
+                            </div>
+                        </AnonymousTemplate>
+                        <LoggedInTemplate>
+                            <asp:Label runat="server" CssClass="label label-primary">Welcome, <asp:LoginName ID="LoginName1" ForeColor="White" runat="server" /><br /></asp:Label>
+                            <br />
+                            <asp:LoginStatus ID="LoginStatus2" runat="server" CssClass="btn btn-sm btn-danger" />
+                        </LoggedInTemplate>
+                    </asp:LoginView>
+
                 </div>
             </div>
 

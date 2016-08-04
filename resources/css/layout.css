@@ -60,3 +60,16 @@ hr {
 li {
     margin: 3px 0px;
 }
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+a:hover {
+    color: white;
+}
+
+a:visited {
+    color: white;
+}

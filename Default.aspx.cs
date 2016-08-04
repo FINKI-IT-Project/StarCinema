@@ -15,12 +15,6 @@ public partial class _Default : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        imageOne.ImageUrl = DEFAULT_MOVIE_POSTER;
-        imageTwo.ImageUrl = DEFAULT_MOVIE_POSTER;
-        imageThree.ImageUrl = DEFAULT_MOVIE_POSTER;
-        imageFour.ImageUrl = DEFAULT_MOVIE_POSTER;
-        imageFive.ImageUrl = DEFAULT_MOVIE_POSTER;
-        imageSix.ImageUrl = DEFAULT_MOVIE_POSTER;
 
         if (!Page.IsPostBack)
         {
