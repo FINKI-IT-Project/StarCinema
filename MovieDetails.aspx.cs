@@ -16,6 +16,7 @@ public partial class MovieDetails : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+
         Page.MaintainScrollPositionOnPostBack = true;
 
         if (Page.IsPostBack == false)
@@ -197,48 +198,29 @@ public partial class MovieDetails : System.Web.UI.Page
         DropDownList seatRow = row.FindControl("seatRow") as DropDownList;
         DropDownList seatNumber = row.FindControl("seatNumber") as DropDownList;
 
-        SqlConnection con = new SqlConnection(connectionString);
-        SqlCommand com = new SqlCommand();
-        com.Connection = con;
-        com.CommandText = "DELETE FROM seats WHERE screen_id = @SID AND row = @ROW AND number = @NUM;";
-        com.Parameters.AddWithValue("@SID", screen_id);
-        com.Parameters.AddWithValue("@ROW", seatRow.Text.ToString());
-        com.Parameters.AddWithValue("@NUM", seatNumber.Text.ToString());
-        string number = seatNumber.Text;
+
+        // WebService
+        WebService ws = new WebService();
 
 
-        try
+        // Reseve the movie seat;
+
+        int rows = ws.reserveSeat(screen_id, seatRow.Text.ToString(), seatNumber.Text.ToString());
+
+        if (rows > 0)
         {
-            con.Open();
-            int rows = com.ExecuteNonQuery();
-
-            lbl1.Text = rows + " rows affected.";
-
-            if (rows > 0)
-            {
-                seatNumber.Items.Remove(seatNumber.Text);
-                messageSuccess.Visible = true;
-                messageSuccess.Text = "<span class='glyphicon glyphicon-ok'></span> <b>Success!</b> You have successfully reserved your seat - Row: <b>" + seatRow.Text + "</b> Number: <b>" + number + "</b>";
-            }
-
-            if (seatNumber.Items.Count == 0)
-            {
-                seatNumber.DataSource = noSeats;
-                seatNumber.DataTextField = null;
-                seatNumber.DataBind();
-                seatNumber.Enabled = false;
-            }
-
-
-
+            seatNumber.Items.Remove(seatNumber.Text);
+            messageSuccess.Visible = true;
+            messageSuccess.Text = "<span class='glyphicon glyphicon-ok'></span> <b>Success!</b> You have successfully reserved your seat - Row: <b>" + seatRow.Text + "</b> Number: <b>" + seatNumber.Text.ToString() + "</b>";
         }
-        catch (Exception ex)
+
+        if (seatNumber.Items.Count == 0)
         {
+            seatNumber.DataSource = noSeats;
+            seatNumber.DataTextField = null;
+            seatNumber.DataBind();
+            seatNumber.Enabled = false;
+        }
 
-        }
-        finally
-        {
-            con.Close();
-        }
     }
 }
