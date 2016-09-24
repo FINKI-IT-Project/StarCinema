@@ -76,7 +76,7 @@
                                 <ul class="nav navbar-nav">
                                     <li><a href="/Default.aspx"><span class="glyphicon glyphicon-home"></span> HOME</a></li>
                                     <li><a href="/Movies.aspx">MOVIES</a></li>
-                                    <li><a href="/About.aspx">ABOUT US</a></li>
+                                    <li><a href="/AboutUs.aspx">ABOUT US</a></li>
                                     <li><a href="/Contact.aspx">CONTACT</a></li>
                                 </ul>
                             </div>
