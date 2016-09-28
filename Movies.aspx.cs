@@ -46,7 +46,8 @@ public partial class Movies : System.Web.UI.Page
 
     protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
     {
-
+        string a = GridView1.Rows[GridView1.SelectedIndex].Cells[0].Text;
+        Response.Redirect(String.Format("MovieDetails.aspx?id=" + a));
     }
 
     protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)

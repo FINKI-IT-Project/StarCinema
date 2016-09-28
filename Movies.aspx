@@ -13,7 +13,7 @@
             <AlternatingRowStyle BackColor="#DCDCDC" />
             <Columns>
                 <asp:BoundField DataField="movie_id" HeaderText="Movie Id" />
-                <asp:BoundField DataField="movie_name" HeaderText="Movie Name" />
+                <asp:ButtonField CommandName="select" DataTextField="movie_name" HeaderText="Movie Name" Text="Button" />
                 <asp:BoundField DataField="day" HeaderText="Day" />
                 <asp:BoundField DataField="hall" HeaderText="Hall" />
                 <asp:BoundField DataField="term" HeaderText="Term" />
